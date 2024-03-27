@@ -1,0 +1,29 @@
+    {% include 'navbar.html' %}
+    <br><br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1>Welcome to our Video Uploader!</h1>
+                <p>We provide a simple and easy-to-use platform for uploading and converting your videos to audio files.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8 text-center">
+                <form action="/upload_video" method="POST" enctype="multipart/form-data" class="border p-4 bg-light">
+                    <h2 class="text-center mb-4">Upload Video</h2>
+                    <div class="form-group text-center">
+                        <label for="video">Select Video File:</label>
+                        <input type="file" class="file" id="video" name="video" accept="video/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   <!-- Bootstrap JS and jQuery -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

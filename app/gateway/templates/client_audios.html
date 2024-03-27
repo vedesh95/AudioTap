@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Audios</title>
+</head>
+<body>
+    <!-- client_audios.html -->
+    {% include 'navbar.html' %}
+    <!-- Your existing content here -->
+
+
+        <div class="container mt-4" style="max-width: 800px;">
+            <h1 class="downloads-header">Available Downloads</h1>
+            {% if audio_links %}
+                <div class="list-group">
+                    {% for audio in audio_links %}
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ audio.video_name.replace('.mp4', '.mp3')|truncate(25) }}</h5>
+                                {% if audio.audio_id %}
+                                    <a href="/download_audio/{{ audio.audio_id }}" class="btn btn-primary">Download</a>
+                                {% else %}
+                                    <small class="text-danger">File currently being processed</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    You have no available downloads.
+                </div>
+            {% endif %}
+        </div>
+
+
+    <!-- <h1>Available Downloads</h1>
+    {% if audio_links %}
+        <ul>
+
+            {% for audio in audio_links %}
+                <li>
+                    Audio: {{ audio.video_name.replace('.mp4', '.mp3') }}
+                    {% if audio.audio_id %}
+                        <a href="/download_audio/{{ audio.audio_id }}" download>Download Audio</a>
+                    {% else %}
+                        Audio not yet ready
+                    {% endif %}
+               </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no available downloads.</p>
+    {% endif %} -->
+</body>
+</html>
