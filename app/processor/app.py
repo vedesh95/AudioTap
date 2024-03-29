@@ -51,15 +51,24 @@ def process_video(ch, method, properties, body):
         video_file = fs.get(video_id_object)
         data = video_file.read()
 
+        #set video status
+        client_videos_collection.update_one(
+            {'client_ip': client_ip, 'videos.video_id': str(video_id)},
+            {'$set': {'videos.$.status': "Video Processing"}}
+        )
+
         # Convert video to audio and save to db
         audio_path = f'/tmp/{video_id}.mp3'
-        convert_video_to_audio(data, audio_path)
+        try:
+            convert_video_to_audio(data, audio_path)
+        except:
+            print("Error processing:", e)
 
         audio_id = fs.put(open(audio_path, 'rb'))
         # Store the association between IP address, video ID, and audio ID in MongoDB
         client_videos_collection.update_one(
             {'client_ip': client_ip, 'videos.video_id': str(video_id)},
-            {'$set': {'videos.$.audio_id': str(audio_id)}}
+            {'$set': {'videos.$.audio_id': str(audio_id), 'videos.$.status': "Video Processed"}}
         )
         print("Audio file will be downloaded automatically")
     except Exception as e:

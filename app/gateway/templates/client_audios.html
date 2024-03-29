@@ -22,7 +22,7 @@
                                 {% if audio.audio_id %}
                                     <a href="/download_audio/{{ audio.audio_id }}" class="btn btn-primary">Download</a>
                                 {% else %}
-                                    <small class="text-danger">File currently being processed</small>
+                                    <small class="text-danger">{{ audio.status }}</small>
                                 {% endif %}
                             </div>
                         </div>

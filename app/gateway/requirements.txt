@@ -5,6 +5,7 @@ click==8.1.7
 decorator==4.4.2
 dnspython==2.6.1
 ez_setup==0.9
+filetype==1.2.0
 Flask==3.0.2
 Flask-PyMongo==2.3.0
 idna==3.6
