@@ -29,6 +29,10 @@ def upload_video():
     client_ip = request.remote_addr
     video_name = video_file.filename
     print(video_name)
+
+    if not video_name.lower().endswith('.mp4'):
+        return render_template('upload.html')
+
     # Store video in GridFS
     video_id = fs.put(video_file)
     
@@ -38,7 +42,7 @@ def upload_video():
     # Add video to client_videos_collection
     client_videos_collection.update_one(
         {'client_ip': client_ip},
-        {'$push': {'videos': {'video_id': str(video_id),'video_name': video_name, 'audio_id': None}}}, 
+        {'$push': {'videos': {'video_id': str(video_id),'video_name': video_name, 'audio_id': None, 'status': "In Queue"}}}, 
         upsert=True
     )
     
@@ -73,9 +77,11 @@ def get_client_audios():
         for video in videos:
             audio_id = video.get('audio_id')
             video_name = video.get('video_name')
+            status = video.get('status')
             audio_links.append({
                 'video_name': video_name,
-                'audio_id': audio_id
+                'audio_id': audio_id,
+                'status': status
             })
     audio_links.reverse()
 
@@ -89,35 +95,3 @@ def upload_form():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port='5001')
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
