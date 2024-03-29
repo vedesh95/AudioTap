@@ -7,6 +7,9 @@
 #### Architecture:
 <img src="./demo/architecture.png" width="600" title="Architecture" alt="Architecture">  
 
+#### Demo Video
+https://github.com/vedesh95/videotomp3/assets/50790991/87070cd4-1145-4ab1-9281-f68690676c98
+
 #### Setup:  
 1. install mongodb, rabbitmq  
 2. make video_audio db in mongodb. Command: use video_audio
